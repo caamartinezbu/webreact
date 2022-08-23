@@ -1,16 +1,16 @@
 //import './App.css';
 import React from "react";
-import {TodoCounter} from './TodoCounter';
+import {TodoCounter} from './TodoCounter'; // importo la funsion, valiable lo que quiera pero llamandola especificamente {TodoCounter}
 import { TodoSearch } from "./TodoSearch";
 import { TodoList } from "./TodoList";
 import { TodoItem } from "./TodoItem";
 import { CreateTodoButton } from "./CreateTodoButton";
 
  const todos = [
-  {text:'Cortar cebolla',completed:false},
+  {text:'Cortar cebolla',completed:true},
   {text:'Tomar el curso de react diario',completed:false},
   {text:'Llorar con la llorona',completed:false},
-  {text:'add kakakaka',completed:false},
+  {text:'add kakakaka',completed:true},
 
 ]; 
 
@@ -19,7 +19,7 @@ import { CreateTodoButton } from "./CreateTodoButton";
 function App() {  // si empieza con letra mayuscula, es un componente
   return (
 
- <React.Fragment>      {/*JSX solo admite que le enviemos un solo componente toca embeber todo dentro de un React.Fragment */}
+ <React.Fragment>      {   /*JSX solo admite que le enviemos un solo componente toca embeber todo dentro de un React.Fragment */}
    
     <TodoCounter/>
  
@@ -30,7 +30,10 @@ function App() {  // si empieza con letra mayuscula, es un componente
 
    <TodoList>
    {todos.map(todo=>(
-     <TodoItem key={todo.text } text={todo.text}/>
+     <TodoItem 
+     key={todo.text } 
+     text={todo.text}
+     completed={todo.completed}/>
    ))}
   </TodoList>
 
@@ -42,3 +45,5 @@ function App() {  // si empieza con letra mayuscula, es un componente
 }
 
 export default App;
+
+
