@@ -7,8 +7,8 @@ import { TodoItem } from "./TodoItem";
 import { CreateTodoButton } from "./CreateTodoButton";
 
  const todos = [
-  {text:'Cortar cebolla',completed:true},
-  {text:'Tomar el curso de react diario',completed:false},
+  {text:'Cortar cebolla',completed:false},
+  {text:'Tomar el curso de react diario',completed:true},
   {text:'Llorar con la llorona',completed:false},
   {text:'add kakakaka',completed:true},
 
