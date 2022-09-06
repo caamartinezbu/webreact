@@ -1,5 +1,6 @@
 import React from "react";
-import './TodoCounter.css';
+import '../css/TodoCounter.css';
+
 
 // Desestructuramos los props que pasamos al componente
 function TodoCounter({total, completed}){

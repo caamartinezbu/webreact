@@ -1,10 +1,6 @@
 //import './App.css';
 import React from "react";
-import {TodoCounter} from './TodoCounter'; // importo la funsion, valiable lo que quiera pero llamandola especificamente {TodoCounter}
-import { TodoSearch } from "./TodoSearch";
-import { TodoList } from "./TodoList";
-import { TodoItem } from "./TodoItem";
-import { CreateTodoButton } from "./CreateTodoButton";
+import { AppUI } from "./AppUI";
 
  const defoulTodos = [
   {text:'Cortar cebolla',completed:false},
@@ -23,14 +19,14 @@ function App() {  // si empieza con letra mayuscula, es un componente
   const [searchValue, setSearchValue] = React.useState(''); // creamos el estado hooks // El estado de nuestra búsqueda
   const completedTodos = todos.filter(todo => todo.completed).length;    // Cantidad de TODOs completados
   const totalTodos = todos.length;     // Cantidad total de TODOs
-  let searchTodos =[];  // Creamos una nueva variable tipo arrays en donde guardaremos las coincidencias con la búsqueda
+  let searchedTodos =[];  // Creamos una nueva variable tipo arrays en donde guardaremos las coincidencias con la búsqueda
 
 
 // Lógica para filtrar
   if (!searchValue.length >= 1){
-      searchTodos=todos;
+      searchedTodos=todos;
   }else{
-    searchTodos= todos.filter(todo =>{
+    searchedTodos= todos.filter(todo =>{
       const todoText = todo.text.toLowerCase();
       const searchText = searchValue.toLowerCase();
       return todoText.includes(searchText);
@@ -63,40 +59,16 @@ const deleteTodo = (text) => {
 
 
   return (
-
- <React.Fragment>      {   /*JSX solo admite que le enviemos un solo componente toca embeber todo dentro de un React.Fragment */}
-   
-    <TodoCounter
-    total={totalTodos}
-    completed={completedTodos}
-    />
- 
-
-    <TodoSearch
+    <AppUI
+    totalTodos={totalTodos}
+    completedTodos={completedTodos}
     searchValue={searchValue}
     setSearchValue={setSearchValue}
+    searchedTodos={searchedTodos}
+    completeTodo={completeTodo}
+    deleteTodo={deleteTodo}
     />
-
-
-
-   <TodoList>
-   {searchTodos.map(todo=>(
-     <TodoItem 
-     key={todo.text } 
-     text={todo.text}
-     completed={todo.completed}
-     onComplete = {() => completeTodo(todo.text)}
-     onDelete = {() => deleteTodo(todo.text)}
-
-     />
-   ))}
-  </TodoList>
-
- <CreateTodoButton/> 
-
-
- </React.Fragment>
-  );
+   );
 }
 
 export default App;
