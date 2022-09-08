@@ -39,7 +39,6 @@ function useLocalStorage(itemName, initialValue){ // Hook de localstorage
                 setLoading(false);
           }catch(error){
             setError(error);
-
           }
     },1000)
   });
