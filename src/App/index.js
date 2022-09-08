@@ -9,31 +9,48 @@ import { AppUI } from "./AppUI";
 //   {text:'add kakakaka',completed:true},
 // ]; 
 
-function useLocalStorage(){
-  
+function useLocalStorage(itemName, initialValue){
+
+  // Traemos nuestros TODOs almacenados
+  const localStorageItem = localStorage.getItem('itemName'); 
+  let parsedItem;
+
+/*Si el usuario es nuevo no existe un item en localStorage,
+  por lo tanto guardamos uno con un array vacío*/
+  if (!localStorageItem) {
+    localStorage.setItem('itemName', JSON.stringify(initialValue)); // guardar datos setItem(name, dato)
+    parsedItem = initialValue;
+
+  } else {
+    // Si existen TODOs en el localStorage los regresamos como nuestros todos
+    parsedItem = JSON.parse(localStorageItem)
+
+  }
+
+  // Guardamos nuestros TODOs del localStorage en nuestro estado  React.useState(parsedItem)
+  const [item, setItem] = React.useState(parsedItem)  // Estado inicial de nuestros TODOs
+
+ // Creamos la función (arrow funtion) en la que actualizaremos nuestro localStorage
+  const saveItem = (newItem) => {
+    // Convertimos a string nuestros TODOs en una variable
+    const stringifiedItem = JSON.stringify(newItem);
+    // Los guardamos en el localStorage
+    localStorage.setItem('itemName', stringifiedItem);
+    // Actualizamos nuestro estado
+    setItem(newItem);
+  };
+return [
+  item,
+  saveItem,
+];
 }
 
 
 function App() {  // si empieza con letra mayuscula, es un componente
 
-// Traemos nuestros TODOs almacenados
-  const localStorageTodos = localStorage.getItem('TODOS_V1'); 
-  let parsedTodos;
+  const [todos, saveTodos] =useLocalStorage('TODOS_V1',[]);
 
-/*Si el usuario es nuevo no existe un item en localStorage,
-  por lo tanto guardamos uno con un array vacío*/
-  if (!localStorageTodos) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([])); // guardar datos setItem(name, dato)
-    parsedTodos = [];
 
-  } else {
-    // Si existen TODOs en el localStorage los regresamos como nuestros todos
-    parsedTodos = JSON.parse(localStorageTodos)
-
-  }
-
-// Guardamos nuestros TODOs del localStorage en nuestro estado  React.useState(parsedTodos)
-  const [todos, setTodos] = React.useState(parsedTodos)  // Estado inicial de nuestros TODOs
   const [searchValue, setSearchValue] = React.useState(''); // creamos el estado hooks // El estado de nuestra búsqueda
   const completedTodos = todos.filter(todo => todo.completed).length;    // Cantidad de TODOs completados
   const totalTodos = todos.length;     // Cantidad total de TODOs
@@ -52,17 +69,7 @@ function App() {  // si empieza con letra mayuscula, es un componente
 
     })
   }
-
- // Creamos la función (arrow funtion) en la que actualizaremos nuestro localStorage
-  const saveTodos = (newTodos) => {
-    // Convertimos a string nuestros TODOs en una variable
-    const stringifiedTodos = JSON.stringify(newTodos);
-    // Los guardamos en el localStorage
-    localStorage.setItem('TODOS_V1', stringifiedTodos);
-    // Actualizamos nuestro estado
-    setTodos(newTodos);
-  };
-
+  
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
