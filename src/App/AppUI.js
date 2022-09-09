@@ -23,26 +23,26 @@ function AppUI() {
             <TodoCounter />
             <TodoSearch />
 
-            
-                
-                    <TodoList>
-                        {error && <p>ups! ha pasado algo ponte a llorar jajaj...</p>}
-                        {loading && <p>estamos cargando espere...</p>}
-                        {(!loading && !searchedTodos.length) && <p>Crea tu primer ToDo</p>}
 
-                        {searchedTodos.map(todo => (
-                            <TodoItem
-                                key={todo.text}
-                                text={todo.text}
-                                completed={todo.completed}
-                                onComplete={() => completeTodo(todo.text)}
-                                onDelete={() => deleteTodo(todo.text)}
 
-                            />
-                        ))}
-                    </TodoList>
-                
-           
+            <TodoList>
+                {error && <p>ups! ha pasado algo ponte a llorar jajaj...</p>}
+                {loading && <p>estamos cargando espere...</p>}
+                {(!loading && !searchedTodos.length) && <p>Crea tu primer ToDo</p>}
+
+                {searchedTodos.map(todo => (
+                    <TodoItem
+                        key={todo.text}
+                        text={todo.text}
+                        completed={todo.completed}
+                        onComplete={() => completeTodo(todo.text)}
+                        onDelete={() => deleteTodo(todo.text)}
+
+                    />
+                ))}
+            </TodoList>
+
+
 
 
 
