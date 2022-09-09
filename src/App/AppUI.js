@@ -5,7 +5,7 @@ import { TodoSearch } from "../components/TodoSearch";
 import { TodoList } from "../components/TodoList";
 import { TodoItem } from "../components/TodoItem";
 import { CreateTodoButton } from "../components/CreateTodoButton";
-
+import { Modal } from "../Modal"
 
 function AppUI() {
 
@@ -14,7 +14,9 @@ function AppUI() {
         loading,
         searchedTodos,
         completeTodo,
-        deleteTodo
+        deleteTodo,
+        openModal,
+        setOpenModal,
     } = React.useContext(TodoContext);
     return (
 
@@ -42,11 +44,17 @@ function AppUI() {
                 ))}
             </TodoList>
 
+            {!!openModal && ( //{searchedTodos[0]?.text}
+                <Modal>
+                    <p>hola mundo pichurrias</p> 
+                </Modal>
+            )}
+
+            <CreateTodoButton
+            setOpenModal={setOpenModal} />
 
 
 
-
-            <CreateTodoButton />
         </React.Fragment>
     );
 }

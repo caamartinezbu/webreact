@@ -16,6 +16,9 @@ function TodoProvider(props) {
 
 
     const [searchValue, setSearchValue] = React.useState(''); // creamos el estado hooks // El estado de nuestra búsqueda
+
+    const [openModal, setOpenModal] = React.useState(false);
+
     const completedTodos = todos.filter(todo => todo.completed).length;    // Cantidad de TODOs completados
     const totalTodos = todos.length;     // Cantidad total de TODOs
     let searchedTodos = [];  // Creamos una nueva variable tipo arrays en donde guardaremos las coincidencias con la búsqueda
@@ -68,6 +71,8 @@ function TodoProvider(props) {
             searchedTodos,
             completeTodo,
             deleteTodo,
+            openModal,
+            setOpenModal,
 
 
         }}>
