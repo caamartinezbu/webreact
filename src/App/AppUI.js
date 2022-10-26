@@ -3,9 +3,11 @@ import { TodoContext } from "../TodoContext";
 import { TodoCounter } from '../components/TodoCounter'; // importo la funsion, valiable lo que quiera pero llamandola especificamente {TodoCounter}
 import { TodoSearch } from "../components/TodoSearch";
 import { TodoList } from "../components/TodoList";
+import { TodoForm } from "../TodoForm";
 import { TodoItem } from "../components/TodoItem";
 import { CreateTodoButton } from "../components/CreateTodoButton";
 import { Modal } from "../Modal"
+
 
 function AppUI() {
 
@@ -46,7 +48,7 @@ function AppUI() {
 
             {!!openModal && ( //{searchedTodos[0]?.text}
                 <Modal>
-                    <p>hola mundo pichurrias</p> 
+                   <TodoForm/>
                 </Modal>
             )}
 
