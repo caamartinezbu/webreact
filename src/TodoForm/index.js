@@ -25,9 +25,7 @@ function TodoForm() {
   const onSubmit = (event) => {
     // prevent default para evitar recargar la página
     event.preventDefault();
-   
-   
-    // Utilizamos nuestra función para añadir nuestro TODO
+       // Utilizamos nuestra función para añadir nuestro TODO
     addTodo(newTodoValue);
     // Cerramos nustro modal
     setOpenModal(false);
