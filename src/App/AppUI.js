@@ -6,11 +6,14 @@ import { TodoList } from "../components/TodoList";
 import { TodoForm } from "../TodoForm";
 import { TodoItem } from "../components/TodoItem";
 import { CreateTodoButton } from "../components/CreateTodoButton";
-import { Modal } from "../Modal"
+import { Modal } from "../Modal";
+import { TodosError } from "../TodosError";
+import { TodosLonding } from "../TodosLonding";
+import { EmptyTodos } from "../EmptyTodos";
 
 
 function AppUI() {
-//ejemplo de commit
+    //ejemplo de commit
     const {
         error,
         loading,
@@ -19,7 +22,7 @@ function AppUI() {
         deleteTodo,
         openModal,
         setOpenModal,
-    } = React.useContext(TodoContext);
+        } = React.useContext(TodoContext);
     return (
 
         <React.Fragment>      {   /*JSX solo admite que le enviemos un solo componente toca embeber todo dentro de un React.Fragment */}
@@ -30,9 +33,10 @@ function AppUI() {
 
 
             <TodoList>
-                {error && <p>ups! ha pasado algo ponte a llorar jajaj...</p>}
-                {loading && <p>estamos cargando espere...</p>}
-                {(!loading && !searchedTodos.length) && <p>Crea tu primer ToDo</p>}
+                {error && <TodosError error ={error}/> }
+                {loading && <TodosLonding/>}
+                {(!loading && !searchedTodos.length) && <EmptyTodos/>}
+                {loading && new Array(2).fill(1).map((a, i) => <TodosLonding key={i} />)}
 
                 {searchedTodos.map(todo => (
                     <TodoItem
@@ -48,12 +52,12 @@ function AppUI() {
 
             {!!openModal && ( //{searchedTodos[0]?.text}
                 <Modal>
-                   <TodoForm/>
+                    <TodoForm />
                 </Modal>
             )}
 
             <CreateTodoButton
-            setOpenModal={setOpenModal} />
+                setOpenModal={setOpenModal} />
 
 
 
